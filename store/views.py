@@ -11,27 +11,15 @@ def show_main_page(request):
     context = {
         'product': Product.objects.all(),
         'title': 'Main page',
-        'categories': categories
     }
     return render(request, 'store/index.html', context)
 
-
-def about(request):
-    context = {
-        'menu': menu
-    }
-    return render(request, 'store/about.html', context)
-
-
-def addpage(request):
-    return HttpResponse('addpage')
 
 
 def show_product(request, product_id):
     context = {
         'product': Product.objects.filter(id=product_id),
         'title': product_id,
-        'categories': categories,
     }
     return render(request, 'store/product_details.html', context)
 
@@ -43,7 +31,7 @@ def show_category(request, category_id):
     context = {
         'products': w,
         'title': Category.objects.filter(id=category_id)[0],
-        'categories': categories,
+        'selected': category_id
     }
     return render(request, 'store/category_details.html', context)
 
