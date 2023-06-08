@@ -1,0 +1,12 @@
+{% extends 'store/base.html' %}
+{% block content %}
+    <ul>
+        {% for i in product %}
+            <h2>
+                <li>
+                {{ i.product_name }}</h2>
+            <p>{{ i.description | linebreaks | truncatewords:20}}</p>
+            <a class="btn btn-primary" href="{{ i.get_absolute_url }}" role="button">Details</a>
+
+        {% endfor %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'store/base.html' %}
+{% block content %}
+{% for i in product %}
+    <h1>{{ i.product_name }}</h1>
+    <p>{{ i.description }}</p>
+{% endfor %}
+{% endblock %}
