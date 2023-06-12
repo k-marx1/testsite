@@ -9,12 +9,18 @@ categories = Category.objects.all()
 
 def show_main_page(request):
     context = {
-        'product': Product.objects.all(),
+        'product': Product.objects.all().order_by('-discount'),
         'title': 'Main page',
     }
     return render(request, 'store/index.html', context)
 
-
+def show_shop(request):
+    context = {
+        'product_list': Product.objects.all(),
+        'title': 'Shop',
+        'categories': Category.objects.all(),
+    }
+    return render(request, 'store/shop.html', context)
 
 def show_product(request, product_id):
     product = get_object_or_404(Product, slug=product_id)

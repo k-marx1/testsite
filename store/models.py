@@ -1,14 +1,18 @@
 from django.db import models
 from django.urls import reverse
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Product(models.Model):
     product_name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
     in_stock = models.IntegerField()
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
+    price = models.FloatField()
+    discount = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(1)], default=0)
+    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0)
     available = models.BooleanField(default=True)
 
 
@@ -21,6 +25,9 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product_details', kwargs={'product_id': self.slug})
+
+    def discount_price(self):
+        return self.price - self.price * self.discount
 
 
 class Category(models.Model):
