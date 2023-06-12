@@ -26,6 +26,28 @@
     https://templatemo.com/tm-559-zay-shop
 
     -->
+    <style type="text/css">
+
+
+        @media all and (min-width: 992px) {
+            .navbar .nav-item .dropdown-menu {
+                display: none;
+            }
+
+            .navbar .nav-item:hover .nav-link {
+            }
+
+            .navbar .nav-item:hover .dropdown-menu {
+                display: block;
+            }
+
+            .navbar .nav-item .dropdown-menu {
+                margin-top: 0;
+            }
+        }
+
+
+    </style>
 </head>
 
 <body>
@@ -77,10 +99,15 @@
                         <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
+                        <a class="nav-link" href="#">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'shop' %}">Shop</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"> Shop </a>
+                        <ul class="dropdown-menu">
+                            {% for i in categories %}
+                            <li><a class="dropdown-item" href='{% url 'category_details' i.slug %}'> {{ i }}</a></li>
+                            {% endfor %}
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>

@@ -39,19 +39,19 @@
                 <a href="{% url 'home' %}"><img src="{% static '/store/images/keyboard_category.jpg' %}"
                                                 class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">Keyboards</h5>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <p class="text-center"><a class="btn btn-success" href="{% url 'category_details' 'keyboard' %}">Go Shop</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img src="{% static '/store/images/display_category.avif' %}"
                                  class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Displays</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <p class="text-center"><a class="btn btn-success" href="{% url 'category_details' 'display' %}">Go Shop</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img src="{% static '/store/images/laptop_category.jpg' %}"
                                  class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Laptops</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <p class="text-center"><a class="btn btn-success" href="{% url 'category_details' 'laptop' %}">Go Shop</a></p>
             </div>
         </div>
     </section>
@@ -74,8 +74,8 @@
                 {% for i in product %}
                     <div class="col-12 col-md-4 mb-4">
                         <div class="card h-100">
-                            <a href="shop-single.html">
-                                <img src="{% static i.photo %}" class="card-img-top" alt="...">
+                            <a href="{% url 'product_details' i.slug %}">
+                                <img src="{{ i.photo.url }}" class="card-img-top" alt="...">
                             </a>
                             <div class="card-body">
                                 <ul class="list-unstyled d-flex justify-content-between">
@@ -89,7 +89,7 @@
                                     <li class="text-muted text-right"><s>{{ i.price }}₽</s></li>
                                     <li class="h2">{{ i.discount_price }}₽</li>
                                 </ul>
-                                <a href="shop-single.html" class="h2 text-decoration-none text-dark">{{ i }}</a>
+                                <a href="{% url 'product_details' i.slug %}" class="h2 text-decoration-none text-dark">{{ i }}</a>
                                 <p class="card-text">
                                     {{ i.description | truncatewords:30 | linebreaks}}
                                 </p>
