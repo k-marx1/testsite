@@ -10,7 +10,7 @@
                 <ul class="list-unstyled">
                     {% for i in categories %}
                         <li><a class="text-decoration-none text-dark"
-                               href="{% url 'category_details' category_id=i.slug %}">{{ i }}</a></li>
+                               href="{% url 'category_details' slug=i.slug %}">{{ i }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
