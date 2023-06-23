@@ -24,7 +24,7 @@
 
 
     <!-- Start Categories of The Month -->
-    <section class="container py-5">
+
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">Categories of The Month</h1>
@@ -75,7 +75,7 @@
                     <div class="col-12 col-md-4 mb-4">
                         <div class="card h-100">
                             <a href="{% url 'product_details' i.slug %}">
-                                <img src="{{ i.photo.url }}" class="card-img-top" alt="...">
+                                <img src="{{ i.image_value_error_handler }}" class="card-img-top" alt="...">
                             </a>
                             <div class="card-body">
                                 <ul class="list-unstyled d-flex justify-content-between">
@@ -100,6 +100,6 @@
                 {% endfor %}
             </div>
         </div>
-    </section>
+
     <!-- End Featured Product -->
 {% endblock %}

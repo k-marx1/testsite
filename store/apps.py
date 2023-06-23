@@ -4,4 +4,4 @@ from django.apps import AppConfig
 class MainPageConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'store'
-    verbose_name = 'Lupa'
+    verbose_name = 'home'

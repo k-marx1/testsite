@@ -1,0 +1,5 @@
+{% extends 'store/base.html' %}
+{% block content %}
+    Hello {{ user }}
+    <a class="btn btn-primary" href="{% url 'logout' %}" role="button">Logout</a>
+{% endblock %}

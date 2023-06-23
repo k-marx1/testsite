@@ -48,6 +48,17 @@
 
 
     </style>
+    <style>
+        .box {
+            margin-top: 1em;
+        }
+    </style>
+
+    <script>
+        $('.message a').click(function () {
+            $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+        });
+    </script>
 </head>
 
 <body>
@@ -108,8 +119,12 @@
                     <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                     <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
                 </a>
-                <a class="nav-icon position-relative text-decoration-none" href="{% url 'sign_up' %}">
-                    <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                {% if request.user.is_authenticated %}
+                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'profile' %}">
+                {% else %}
+                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'sign_up' %}">
+                {% endif %}
+                <i class="fa fa-fw fa-user text-dark mr-3"></i>
                 </a>
             </div>
         </div>
@@ -135,9 +150,10 @@
         </form>
     </div>
 </div>
-
-{% block content %}
-{% endblock %}
+<div class="container pb-5 box">
+    {% block content %}
+    {% endblock %}
+</div>
 
 <!-- Start Footer -->
 <footer class="bg-dark" id="tempaltemo_footer">

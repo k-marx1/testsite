@@ -1,22 +1,28 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 from .models import *
 
 
-class AddProduct(forms.Form):
+class AddProduct(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
 
-    def __init__(self, *args, **kwargs):
-        super(AddProduct, self).__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].widget.attrs.update({'class': 'form-control'})
 
-    product_name = forms.CharField(max_length=255, widget=forms.TextInput())
-    slug = forms.SlugField(max_length=255, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.CharField(max_length=1000, widget=forms.Textarea(attrs={'class': 'form-control'}))
-    photo = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
-    in_stock = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label='Nothing', widget=forms.Select(attrs={'class': 'form-control'}))
-    price = forms.FloatField()
-    discount = forms.FloatField(validators=[MinValueValidator(0), MaxValueValidator(1)], )
-    rating = forms.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5)], required=False)
-    available = forms.ChoiceField(required=False, initial=True)
+class RegisterUserForm(UserCreationForm):
+    username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-input'}),
+            'password2': forms.PasswordInput(attrs={'class': 'form-input'})
+        }
+
 
